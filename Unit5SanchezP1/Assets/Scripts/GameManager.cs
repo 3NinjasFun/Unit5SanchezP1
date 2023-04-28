@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     public float spawnRate = 1.0f;
 
     int score;
+    public int lives;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI livesText;
     public TextMeshProUGUI gameOverText;
 
     public bool isGameActive;
@@ -29,8 +31,10 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = true;
         score = 0;
+        lives = 3;
         StartCoroutine(SpawnTarget());
         UpdateScore(0);
+        UpdateLives(0);
         spawnRate /= difficulty;
 
         titleScreen.gameObject.SetActive(false);
@@ -50,6 +54,11 @@ public class GameManager : MonoBehaviour
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
+    }
+    public void UpdateLives(int liveToSub)
+    {
+        lives -= liveToSub;
+        livesText.text = "Lives: " + lives;
     }
 
     public void GameOver()  
