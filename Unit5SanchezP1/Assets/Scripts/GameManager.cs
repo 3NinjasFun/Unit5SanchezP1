@@ -19,7 +19,15 @@ public class GameManager : MonoBehaviour
     public bool isGameActive;
 
     public Button restartButton;
+    public Button resumeButton;
     public GameObject titleScreen;
+
+    
+
+    public bool isPaused = false;
+    public bool isPlaying = true;
+
+ 
 
 
     // Start is called before the first frame update
@@ -77,6 +85,44 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+
+            GameObject[] clones = GameObject.FindGameObjectsWithTag("Good");
+
+            foreach (GameObject clone in clones)
+            {
+                BoxCollider boxCollider = clone.GetComponent<BoxCollider>();
+
+                if(boxCollider != null)
+                {
+                    boxCollider.enabled = false;
+                }
+            }
+
+
+            Time.timeScale = 0.0f;
+
+            resumeButton.gameObject.SetActive(true);
+            
+        }
+    }
+    public void Resume()
+
+    {
+        Time.timeScale = 1.0f;
+        resumeButton.gameObject.SetActive(false);
+
+        GameObject[] clones = GameObject.FindGameObjectsWithTag("Good");
+
+        foreach (GameObject clone in clones)
+        {
+            BoxCollider boxCollider = clone.GetComponent<BoxCollider>();
+
+            if (boxCollider != null)
+            {
+                boxCollider.enabled = true;
+            }
+        }
     }
 }
