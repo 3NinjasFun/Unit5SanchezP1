@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
     public bool isPaused = false;
     public bool isPlaying = true;
 
+    private Button start;
+
  
 
 
